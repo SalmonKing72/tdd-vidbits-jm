@@ -11,8 +11,8 @@ describe('User visits root', () => {
     describe('to create a new item', () => {
         it('provides a form to create a new item', () => {
             browser.url('/');
-            browser.click('a[href="/videos/create.html"]');
-            assert.include(browser.getText('a[id="create-video-link"]'), 'Save a video');
+            browser.click('a[id="create-video-link"]');
+            assert.include(browser.getText('a[id="save-video-link"]'), 'Save a video');
         });
     })
 });
