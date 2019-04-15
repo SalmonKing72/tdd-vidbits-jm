@@ -13,7 +13,23 @@
       </div>
     </div>
     <div id="create-video-container" class="contents-container">
-        <a id="save-video-link" href="">Save a video</a>
+        <form class="input-form" action="/videos" method="post" >
+          <!-- Add your form elements here -->
+          <label class="form-label" for="title">Title</label>
+          <input id="title-input" name="title" maxlength="50"/>
+
+          <label class="form-label" for="description">Description</label>
+          <textarea id="description-input" name="description"></textarea>
+
+          <div class="form-navigation">
+            <a href="/">
+              Back
+            </a>
+            <button class="button submit-button" id="submit-button" type="submit">
+              <p>Save a video</p>
+            </button>
+          </div>
+        </form>
     </div>
   </body>
 </html>
