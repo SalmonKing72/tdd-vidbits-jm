@@ -10,7 +10,7 @@ describe('User visits create item page', () => {
                 title: "69 Camaro SS"
             });
 
-            browser.url('/videos/create.html');
+            browser.url('/videos/create');
             browser.setValue('#title-input', video.title);
             browser.setValue('#description-input', video.description);
             browser.click('#submit-button');
