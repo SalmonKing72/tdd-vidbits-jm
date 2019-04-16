@@ -5,10 +5,10 @@ const app = require('../../app');
 const Video = require('../../models/video');
 
 const {buildItemObject} = require('../test-utils');
-const {connectDatabaseAndDropData, disconnectDatabase} = require('../database-utils');
+const {connectDatabase, disconnectDatabase} = require('../database-utils');
 
 describe('Server path: /videos', () => {
-    beforeEach(connectDatabaseAndDropData);
+    beforeEach(connectDatabase);
 
     afterEach(disconnectDatabase);
 
