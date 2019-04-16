@@ -22,6 +22,8 @@ describe('Server path: /videos', () => {
                 .send(videoToCreate);
 
             assert.strictEqual(response.status, 201);
+            assert.include(response.text, videoToCreate.title);
+            assert.include(response.text, videoToCreate.description);
         });
 
         it('creates a video and persists it', async () => {

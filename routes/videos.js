@@ -9,8 +9,11 @@ router.post('/videos', async (req, res, err) => {
         title: videoTitle,
         description: videoDescription
     });
-    
-    res.status(201).send();
+
+    res.status(201).send(`
+        <h1>${videoTitle}</h1>
+        <p>${videoDescription}</>
+    `);
 });
 
 module.exports = router;
