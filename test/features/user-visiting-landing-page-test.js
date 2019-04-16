@@ -18,8 +18,8 @@ describe('User visits root', () => {
             browser.click('#submit-button');
             browser.url('/');
 
-            assert.include(browser.getText('body'), video.title);
-            assert.include(browser.getText('body'), video.description);
+            assert.include(browser.getText('#videos-container'), video.title);
+            assert.include(browser.getText('#videos-container'), video.description);
         })
     })
 

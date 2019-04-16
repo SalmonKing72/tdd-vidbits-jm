@@ -3,7 +3,7 @@ const Video = require('../models/video');
 
 router.get('/', async (req, res, err) => {
     const videos = await Video.find({});
-    res.render('index', {});
+    res.render('index', {videos});
 })
 
 router.get('/videos/create', async (req, res, err) => {
