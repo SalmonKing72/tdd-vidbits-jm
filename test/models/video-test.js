@@ -24,4 +24,17 @@ describe('Model: Video', () => {
       assert.strictEqual(testTitle.toString(), video.title);
     });
   });
+
+  describe('Video\'s description field', () => {
+    it('should be a string', async () => {
+      const testDescription = 3;
+
+      const video = await Video.create({
+        title: 'test',
+        description: testDescription
+      });
+
+      assert.strictEqual(testDescription.toString(), video.description);
+    });
+  });
 });
