@@ -11,13 +11,20 @@ router.get('/create', async (req, res, err) => {
 })
 
 router.post('/', async (req, res, err) => {
-    const videoTitle = req.body.title;
+    const videoTitle = (req.body.title) ? req.body.title : '';
     const videoDescription = req.body.description;
 
-    await Video.create({
-        title: videoTitle,
-        description: videoDescription
-    });
+    if (!videoTitle) {
+        res.status(400).send()
+        return;
+    }
+
+    if (videoTitle && videoDescription) {
+        await Video.create({
+            title: videoTitle,
+            description: videoDescription
+        });
+    }
 
     res.status(201).send(`
         <h1>${videoTitle}</h1>

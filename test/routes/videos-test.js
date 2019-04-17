@@ -58,7 +58,7 @@ describe('Server path: /videos', () => {
             const videos = await Video.find({});
     
             assert.equal(videos.length, 0);
-            // assert.strictEqual(response.status, 400);
+            assert.strictEqual(response.status, 400);
         })
 
         it('creates a video and persists it', async () => {
