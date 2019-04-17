@@ -7,15 +7,15 @@ router.get('/', async (req, res, err) => {
 })
 
 router.get('/create', async (req, res, err) => {
-    res.render('create', {});
+    res.render('videos/create', {});
 })
 
 router.post('/', async (req, res, err) => {
     const videoTitle = (req.body.title) ? req.body.title : '';
     const videoDescription = req.body.description;
 
-    if (!videoTitle) {
-        res.status(400).send()
+    if (!videoTitle || videoTitle.length === 0) {
+        res.status(400).render('videos/create', {});
         return;
     }
 

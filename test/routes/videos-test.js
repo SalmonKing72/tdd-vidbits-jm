@@ -1,6 +1,5 @@
 const {assert} = require('chai');
 const request = require('supertest');
-const {jsdom} = require('jsdom');
 
 const Video = require('../../models/video');
 const app = require('../../app');
@@ -59,7 +58,20 @@ describe('Server path: /videos', () => {
     
             assert.equal(videos.length, 0);
             assert.strictEqual(response.status, 400);
-        })
+        });
+
+        it('renders the video form when the title is empty', async () => {
+            const invalidItemToCreate = {
+                description: 'test'
+            };
+
+            const response = await request(app)
+                .post('/videos')
+                .type('form')
+                .send(invalidItemToCreate);
+
+            assert.include(parseTextFromHTML(response.text, 'body'), 'Title');
+        });
 
         it('creates a video and persists it', async () => {
             const videoToCreate = buildItemObject();
