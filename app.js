@@ -21,7 +21,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //handler routes for video app
-app.use('/', videosRoute);
+app.get('/', function (req, res, next) {
+  res.redirect('/videos');
+});
+
+app.use('/videos', videosRoute);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

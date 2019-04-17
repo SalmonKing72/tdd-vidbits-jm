@@ -7,7 +7,7 @@ const app = require('../../app');
 const {parseTextFromHTML, seedItemToDatabase} = require('../test-utils');
 const {connectDatabase, disconnectDatabase} = require('../database-utilities');
 
-describe('Server path: /', () => {
+describe('Server path: /videos', () => {
     beforeEach(connectDatabase);
     afterEach(disconnectDatabase);
 
@@ -16,7 +16,7 @@ describe('Server path: /', () => {
             const video = await seedItemToDatabase();
       
             const response = await request(app)
-                .get(`/`);
+                .get(`/videos/`);
       
             assert.include(parseTextFromHTML(response.text, '#videos-container'), video.title);
             assert.include(parseTextFromHTML(response.text, '#videos-container'), video.description);
