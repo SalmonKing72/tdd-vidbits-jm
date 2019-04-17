@@ -1,19 +1,22 @@
 <div id="create-video-container" class="contents-container">
-        <form class="input-form" action="/videos" method="post" >
-          <!-- Add your form elements here -->
-          <label class="form-label" for="title">Title</label>
-          <input id="title-input" name="title" maxlength="50"/>
+  <form class="input-form" action="/videos" method="post" >
+    <!-- Add your form elements here -->
+    <label class="form-label" for="title">Title</label>
+    <input id="title-input" name="title" maxlength="50"/>
+    {{#with newVideo}}
+    <span>{{errors.title.message}}</span>
+    {{/with}}
 
-          <label class="form-label" for="description">Description</label>
-          <textarea id="description-input" name="description"></textarea>
+    <label class="form-label" for="description">Description</label>
+    <textarea id="description-input" name="description"></textarea>
 
-          <div class="form-navigation">
-            <a href="/">
-              Back
-            </a>
-            <button class="button submit-button" id="submit-button" type="submit">
-              <p>Save a video</p>
-            </button>
-          </div>
-        </form>
+    <div class="form-navigation">
+      <a href="/">
+        Back
+      </a>
+      <button class="button submit-button" id="submit-button" type="submit">
+        <p>Save a video</p>
+      </button>
     </div>
+  </form>
+</div>

@@ -60,7 +60,7 @@ describe('Server path: /videos', () => {
             assert.strictEqual(response.status, 400);
         });
 
-        it('renders the video form when the title is empty', async () => {
+        it('renders the video form with errors when the title is empty', async () => {
             const invalidItemToCreate = {
                 description: 'test'
             };
@@ -70,7 +70,7 @@ describe('Server path: /videos', () => {
                 .type('form')
                 .send(invalidItemToCreate);
 
-            assert.include(parseTextFromHTML(response.text, 'body'), 'Title');
+            assert.include(parseTextFromHTML(response.text, 'form'), 'required');
         });
 
         it('creates a video and persists it', async () => {
