@@ -136,6 +136,11 @@ form textarea {
   display: block;
 }
 
+.error-message {
+  display: block;
+  color: red;
+}
+
 .video-description {
   padding: 30px 10px;
 }
