@@ -18,6 +18,32 @@ body {
   display: block;
 }
 
+.save-video-button {
+  text-align: center; 
+  background-color: #ff9b34;
+  border: none;
+  color: white;
+  text-decoration: none;
+  margin: 0 auto;
+  font-size: 16px;
+  width: 100px;
+  display: inline-block;
+  padding: 1px 7px 2px;
+}
+
+.back-button {
+  text-align: center; 
+  background-color: #ff9b34;
+  border: none;
+  color: white;
+  text-decoration: none;
+  margin: 0 auto;
+  font-size: 16px;
+  width: 100px;
+  display: inline-block;
+  padding: 1px 7px 2px;
+}
+
 .title-container {
   height: 145px;
   display: flex;

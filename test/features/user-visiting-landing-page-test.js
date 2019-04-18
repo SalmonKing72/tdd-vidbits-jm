@@ -27,7 +27,7 @@ describe('User visits root', () => {
         it('provides a form to create a new item', () => {
             browser.url('/');
             browser.click('a[id="create-video-link"]');
-            assert.include(browser.getText('button[id="submit-button"]'), 'Save a video');
+            assert.include(browser.getText('button[id="submit-button"]'), 'Save Video');
         });
     })
 });
