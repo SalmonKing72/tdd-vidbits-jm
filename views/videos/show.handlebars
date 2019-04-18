@@ -2,12 +2,12 @@
 <div id="videos-container" class="contents-container">
     <div class="video-card">
         <div class="video-title">
-            {{title}}
-        </div>
-        <div class="video-description">
-            {{description}}
-        </div>
+            <h1>{{title}}</h1>
+        </div>        
         <iframe class="video-player" src="{{videoUrl}}" frameborder="0" allowfullscreen></iframe>
+        <div class="video-description">
+            <p>{{description}}</p>
+        </div>
     </div>
 </div>
 {{/with}}
