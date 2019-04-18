@@ -1,13 +1,13 @@
+{{#with video}}
 <div id="videos-container" class="contents-container">
-    {{#each videos as |video|}}
     <div class="video-card">
         <div class="video-title">
-            {{video.title}}
+            {{title}}
         </div>
         <div class="video-description">
-            {{video.description}}
+            {{description}}
         </div>
     </div>
-    {{/each}}
 </div>
-<a id="create-video-link" href="/videos/create">Add a Video</a>
+{{/with}}
+<a id="back-link" href="/">Back</a>

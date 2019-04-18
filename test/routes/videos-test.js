@@ -87,3 +87,25 @@ describe('Server path: /videos', () => {
         });
     });
 });
+
+describe('Server path: /videos/:videoId', () => {
+    beforeEach(connectDatabase);
+    afterEach(disconnectDatabase);
+
+    describe('GET', () => {
+        it('renders a single video and its fields', async () => {
+            const video = await seedItemToDatabase({
+                description: "My favorite item", 
+                title: "69 Camaro SS"
+            });
+
+            const response = await request(app)
+                .get(`/videos/${video._id}`)
+                .send();
+
+            assert.equal(response.status, 200);
+            assert.include(parseTextFromHTML(response.text, '.video-title'), video.title);
+            assert.include(parseTextFromHTML(response.text, '.video-description'), video.description);
+        });
+    })
+});

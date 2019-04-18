@@ -27,9 +27,18 @@ router.post('/', async (req, res, err) => {
         await video.save();
         res.status(201).send(`
             <h1>${videoTitle}</h1>
-            <p>${videoDescription}</>
+            <p>${videoDescription}</p>
         `);
     }
+});
+
+router.get('/:videoId', async (req, res, err) => {
+    const video = await Video.findById(req.params.videoId);
+
+    if (!video) {
+        res.status(404).send();
+    }
+    res.render('videos/show', {video: video.toJSON()});
 });
 
 module.exports = router;
