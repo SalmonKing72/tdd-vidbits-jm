@@ -39,9 +39,7 @@ describe('Server path: /videos', () => {
                 .type('form')
                 .send(videoToCreate);
 
-            assert.strictEqual(response.status, 201);
-            assert.include(response.text, videoToCreate.title);
-            assert.include(response.text, videoToCreate.description);
+            assert.strictEqual(response.status, 302);
         });
 
         it('does not persist a video without a title', async () => {
@@ -82,8 +80,13 @@ describe('Server path: /videos', () => {
                 .type('form')
                 .send(videoToCreate);
 
+            //check to see if the video exists in the DB.
             let createdVideo = await Video.findOne(videoToCreate);
             assert.isNotNull(createdVideo, 'the video was not created in the database');
+            
+            //check to see if we redirect to the video's view
+            assert.strictEqual(response.status, 302);
+            assert.equal(response.headers.location, `/videos/${createdVideo._id}`);
         });
     });
 });
