@@ -12,7 +12,8 @@ describe('Model: Video', () => {
 
       const video = await Video.create({
         title: testTitle,
-        description: 'test'
+        description: 'test',
+        videoUrl: 'test'
       });
 
       assert.strictEqual(testTitle.toString(), video.title);
@@ -25,10 +26,25 @@ describe('Model: Video', () => {
 
       const video = await Video.create({
         title: 'test',
-        description: testDescription
+        description: testDescription,
+        videoUrl: 'test'
       });
 
       assert.strictEqual(testDescription.toString(), video.description);
+    });
+  });
+
+  describe('Video\'s url field', () => {
+    it('should be a string', async () => {
+      const testUrl = 3;
+
+      const video = await Video.create({
+        title: 'test',
+        description: 'test',
+        videoUrl: testUrl
+      });
+
+      assert.strictEqual(testUrl.toString(), video.videoUrl);
     });
   });
 });

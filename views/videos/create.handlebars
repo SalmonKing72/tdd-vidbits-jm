@@ -7,6 +7,12 @@
     <span>{{errors.title.message}}</span>
     {{/with}}
 
+    <label class="form-label" for="videoUrl">Video URL</label>
+    <input id="videoUrl-input" name="videoUrl"/>
+    {{#with newVideo}}
+    <span>{{errors.videoUrl.message}}</span>
+    {{/with}}
+
     <label class="form-label" for="description">Description</label>
     <textarea id="description-input" name="description">{{newVideo.description}}</textarea>
 

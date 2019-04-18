@@ -7,7 +7,10 @@
         <div class="video-description">
             {{description}}
         </div>
+        <iframe class="video-player" src="{{videoUrl}}" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 {{/with}}
-<a id="back-link" href="/">Back</a>
+<a id="back-link" class="back-button" href="/">
+    <p>Back</p>
+</a>

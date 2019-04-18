@@ -4,7 +4,7 @@ const request = require('supertest');
 const Video = require('../../models/video');
 const app = require('../../app');
 
-const {parseTextFromHTML, buildItemObject, seedItemToDatabase} = require('../test-utils');
+const {parseTextFromHTML, buildItemObject, seedItemToDatabase, findIframeElementBySource} = require('../test-utils');
 const {connectDatabase, disconnectDatabase} = require('../database-utilities');
 
 describe('Server path: /videos', () => {
@@ -45,6 +45,7 @@ describe('Server path: /videos', () => {
         it('does not persist a video without a title', async () => {
             const invalidItemToCreate = {
                 description: 'test',
+                videoUrl: 'https://www.youtube.com/embed/6f1AmbR2pzM'
             };
         
             const response = await request(app)
@@ -60,7 +61,8 @@ describe('Server path: /videos', () => {
 
         it('renders the video form with errors when the title is empty', async () => {
             const invalidItemToCreate = {
-                description: 'test'
+                description: 'test',
+                videoUrl: 'https://www.youtube.com/watch?v=6f1AmbR2pzM'
             };
 
             const response = await request(app)
@@ -99,7 +101,8 @@ describe('Server path: /videos/:videoId', () => {
         it('renders a single video and its fields', async () => {
             const video = await seedItemToDatabase({
                 description: "My favorite item", 
-                title: "69 Camaro SS"
+                title: "69 Camaro SS",
+                videoUrl: 'https://www.youtube.com/embed/UiZxU9Ykhr8'
             });
 
             const response = await request(app)
@@ -109,6 +112,8 @@ describe('Server path: /videos/:videoId', () => {
             assert.equal(response.status, 200);
             assert.include(parseTextFromHTML(response.text, '.video-title'), video.title);
             assert.include(parseTextFromHTML(response.text, '.video-description'), video.description);
+            const playerElement = findIframeElementBySource(response.text, video.videoUrl);
+            assert.equal(playerElement.src, video.videoUrl);
         });
     })
 });

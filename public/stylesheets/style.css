@@ -95,7 +95,7 @@ form input[name=title] {
   padding: 5px;
 }
 
-form input[name=url] {
+form input[name=videoUrl] {
   display: block;
   margin: 0 auto;
   margin-bottom: 40px;

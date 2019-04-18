@@ -5,13 +5,24 @@ const Video = require('../models/video');
 const buildItemObject = (options = {}) => {
   const title = options.title || 'My favorite video';
   const description = options.description || 'Just the best video';
-  return {title, description};
+  const videoUrl = options.videoUrl || 'https://www.youtube.com/embed/6f1AmbR2pzM';
+  return {title, description, videoUrl};
 };
 
 // Add a sample Item object to mongodb
 const seedItemToDatabase = async (options = {}) => {
   const video = await Video.create(buildItemObject(options));
   return video;
+};
+
+// find video player by source
+findIframeElementBySource = (htmlAsString, src) => {
+  const iframe = jsdom(htmlAsString).querySelector(`iframe[src="${src}"]`);
+  if (iframe !== null) {
+    return iframe;
+  } else {
+    throw new Error(`Iframe with src "${src}" not found in HTML string`);
+  }
 };
 
 // extract text from an Element by selector.
@@ -38,5 +49,6 @@ module.exports = {
   buildItemObject,
   parseTextFromHTML,
   parseValueFromHTMLInput,
-  seedItemToDatabase
+  seedItemToDatabase,
+  findIframeElementBySource
 };

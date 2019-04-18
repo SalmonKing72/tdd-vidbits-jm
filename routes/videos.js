@@ -13,10 +13,12 @@ router.get('/create', async (req, res, err) => {
 router.post('/', async (req, res, err) => {
     const videoTitle = req.body.title;
     const videoDescription = req.body.description;
+    const videoUrl = req.body.videoUrl;
 
     const video = new Video({
         title: videoTitle,
-        description: videoDescription
+        description: videoDescription,
+        videoUrl: videoUrl
     });
 
     video.validateSync();

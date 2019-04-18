@@ -7,12 +7,14 @@ describe('User visits create item page', () => {
         it('renders the newly created video', () => {
             let video = buildItemObject({
                 description: "My favorite video",
-                title: "69 Camaro SS"
+                title: "69 Camaro SS",
+                videoUrl: 'https://www.youtube.com/embed/UiZxU9Ykhr8'
             });
 
             browser.url('/videos/create');
             browser.setValue('#title-input', video.title);
             browser.setValue('#description-input', video.description);
+            browser.setValue('#videoUrl-input', video.videoUrl);
             browser.click('#submit-button');
 
             assert.include(browser.getText('body'), video.title);

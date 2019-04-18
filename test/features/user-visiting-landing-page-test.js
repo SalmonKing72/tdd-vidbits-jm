@@ -15,6 +15,7 @@ describe('User visits root', () => {
             browser.url('/videos/create');
             browser.setValue('#title-input', video.title);
             browser.setValue('#description-input', video.description);
+            browser.setValue('#videoUrl-input', video.videoUrl);
             browser.click('#submit-button');
             browser.url('/');
 
