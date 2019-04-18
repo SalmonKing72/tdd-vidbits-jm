@@ -71,6 +71,7 @@ describe('Server path: /videos', () => {
                 .send(invalidItemToCreate);
 
             assert.include(parseTextFromHTML(response.text, 'form'), 'required');
+            assert.include(parseTextFromHTML(response.text, 'body'), invalidItemToCreate.description);
         });
 
         it('creates a video and persists it', async () => {
