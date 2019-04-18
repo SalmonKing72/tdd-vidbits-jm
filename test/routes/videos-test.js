@@ -57,12 +57,54 @@ describe('Server path: /videos', () => {
     
             assert.equal(videos.length, 0);
             assert.strictEqual(response.status, 400);
+            assert.include(response.text, invalidItemToCreate.description);
+            assert.include(response.text, invalidItemToCreate.videoUrl);
+        });
+
+        it('does not persist a video without a url', async () => {
+            const invalidItemToCreate = {
+                title: 'testing',
+                description: 'test'
+            };
+        
+            const response = await request(app)
+                .post('/videos')
+                .type('form')
+                .send(invalidItemToCreate);
+    
+            const videos = await Video.find({});
+    
+            assert.equal(videos.length, 0);
+            assert.strictEqual(response.status, 400);
+            assert.include(parseTextFromHTML(response.text, 'form'), 'required');
+            assert.include(response.text, invalidItemToCreate.description);
+            assert.include(response.text, invalidItemToCreate.title);
+        });
+
+        it('does not persist a video without a description', async () => {
+            const invalidItemToCreate = {
+                title: 'testing',
+                videoUrl: 'test'
+            };
+        
+            const response = await request(app)
+                .post('/videos')
+                .type('form')
+                .send(invalidItemToCreate);
+    
+            const videos = await Video.find({});
+    
+            assert.equal(videos.length, 0);
+            assert.strictEqual(response.status, 400);
+            assert.include(parseTextFromHTML(response.text, 'form'), 'required');
+            assert.include(response.text, invalidItemToCreate.title);
+            assert.include(response.text, invalidItemToCreate.videoUrl);
         });
 
         it('renders the video form with errors when the title is empty', async () => {
             const invalidItemToCreate = {
                 description: 'test',
-                videoUrl: 'https://www.youtube.com/watch?v=6f1AmbR2pzM'
+                videoUrl: 'https://www.youtube.com/embed/6f1AmbR2pzM'
             };
 
             const response = await request(app)
@@ -71,7 +113,8 @@ describe('Server path: /videos', () => {
                 .send(invalidItemToCreate);
 
             assert.include(parseTextFromHTML(response.text, 'form'), 'required');
-            assert.include(parseTextFromHTML(response.text, 'body'), invalidItemToCreate.description);
+            assert.include(response.text, invalidItemToCreate.description);
+            assert.include(response.text, invalidItemToCreate.videoUrl);
         });
 
         it('creates a video and persists it', async () => {

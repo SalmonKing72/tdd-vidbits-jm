@@ -2,19 +2,22 @@
   <form class="input-form" action="/videos" method="post" >
     <!-- Add your form elements here -->
     <label class="form-label" for="title">Title</label>
-    <input id="title-input" name="title" maxlength="50"/>
+    <input id="title-input" name="title" maxlength="50" value="{{newVideo.title}}"/>
     {{#with newVideo}}
     <span>{{errors.title.message}}</span>
     {{/with}}
 
     <label class="form-label" for="videoUrl">Video URL</label>
-    <input id="videoUrl-input" name="videoUrl"/>
+    <input id="videoUrl-input" name="videoUrl" value="{{newVideo.videoUrl}}"/>
     {{#with newVideo}}
     <span>{{errors.videoUrl.message}}</span>
     {{/with}}
 
     <label class="form-label" for="description">Description</label>
     <textarea id="description-input" name="description">{{newVideo.description}}</textarea>
+    {{#with newVideo}}
+    <span>{{errors.description.message}}</span>
+    {{/with}}
 
     <div class="form-navigation">
       <a class="back-button" href="/">
