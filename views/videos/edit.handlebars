@@ -1,0 +1,31 @@
+<div id="update-video-container" class="contents-container">
+  <form class="input-form" action="/videos/{{newVideo._id}}/updates" method="post" >
+    <!-- Add your form elements here -->
+    {{#with newVideo}}
+    <span class="error-message">{{errors.title.message}}</span>
+    {{/with}}
+    <label class="form-label" for="title">Title</label>
+    <input id="title-input" name="title" maxlength="50" value="{{newVideo.title}}"/>
+
+    {{#with newVideo}}
+    <span class="error-message">{{errors.videoUrl.message}}</span>
+    {{/with}}
+    <label class="form-label" for="videoUrl">Video URL</label>
+    <input id="videoUrl-input" name="videoUrl" value="{{newVideo.videoUrl}}"/>
+
+    {{#with newVideo}}
+    <span class="error-message">{{errors.description.message}}</span>
+    {{/with}}
+    <label class="form-label" for="description">Description</label>
+    <textarea id="description-input" name="description">{{newVideo.description}}</textarea>
+
+    <div class="form-navigation">
+      <a class="back-button" href="/">
+        <p>Back</p>
+      </a>
+      <button class="button submit-button save-video-button" id="submit-button" type="submit">
+        <p>Save Video</p>
+      </button>
+    </div>
+  </form>
+</div>

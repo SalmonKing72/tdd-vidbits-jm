@@ -40,4 +40,13 @@ router.get('/:videoId', async (req, res, err) => {
     res.render('videos/show', {video: video.toJSON()});
 });
 
+router.get('/:videoId/edit', async (req, res, err) => {
+    const video = await Video.findById(req.params.videoId);
+
+    if (!video) {
+        res.status(404).send();
+    }
+    res.render('videos/edit', {newVideo: video});
+});
+
 module.exports = router;
