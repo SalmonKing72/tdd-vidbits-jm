@@ -11,13 +11,13 @@
     </div>
 </div>
 {{/with}}
-<a id="back-link" class="back-button" href="/">
-    <p>Back</p>
-</a>
-<a href="/videos/{{video._id}}/edit" class="button submit-button edit-video-button" id="edit-button">
-    <p>Edit</p>
-</a>
-<form id="delete-video-form" action="/videos/{{video._id}}/deletions" method="post">
+<form id="video-form" action="/videos/{{video._id}}/deletions" method="post">
+    <a id="back-link" class="back-button" href="/">
+        <p>Back</p>
+    </a>
+    <a href="/videos/{{video._id}}/edit" class="button submit-button edit-video-button" id="edit-button">
+        <p>Edit</p>
+    </a>
     <button class="button submit-button delete-video-button" id="delete-button">
         <p>Delete</p>
     </button>

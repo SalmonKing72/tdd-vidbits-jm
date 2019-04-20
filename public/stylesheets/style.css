@@ -18,7 +18,7 @@ body {
   display: block;
 }
 
-.save-video-button, .edit-video-button {
+.save-video-button, .edit-video-button, .delete-video-button {
   text-align: center; 
   background-color: #ff9b34;
   border: none;
@@ -58,6 +58,7 @@ body {
 
 .video-card {
   background-color: #ffffff;
+  border-radius: 5px;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.5);
   margin: 40px;
 }
@@ -121,6 +122,11 @@ form textarea {
   padding: 5px;
 }
 
+.error-message {
+  display: block;
+  color: red;
+}
+
 /* Show page */
 
 .input-button {
@@ -136,13 +142,18 @@ form textarea {
   display: block;
 }
 
-.error-message {
-  display: block;
-  color: red;
+#video-form {
+  background-color: #212121;
 }
 
 .video-description {
   padding: 30px 10px;
+}
+
+.video-title a {
+  color: #7a797a;
+  font-size: 2rem;
+  text-decoration: none;
 }
 
 
