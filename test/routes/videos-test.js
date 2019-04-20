@@ -282,7 +282,7 @@ describe('Server path: /videos/:videoId/deletions', () => {
             const testVideo = await seedItemToDatabase(videoOptions);
     
             const response = await request(app)
-                .post(`/items/${testVideo._id}/delete`)
+                .post(`/videos/${testVideo._id}/deletions`)
                 .type('form')
                 .send(testVideoInput);
     
