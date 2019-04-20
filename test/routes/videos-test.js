@@ -265,3 +265,32 @@ describe('Server path: /videos/:videoId/updates', () => {
         });
     });
 });
+
+describe('Server path: /videos/:videoId/deletions', () => {
+    beforeEach(connectDatabase);
+    afterEach(disconnectDatabase);
+
+    describe('POST', () => {
+        it('deletes the video', async () => {
+            const videoOptions = {
+                description: "My favorite item", 
+                videoUrl: 'https://www.youtube.com/embed/UiZxU9Ykhr8',
+                title: "69 Camaro SS"
+            };
+    
+            const testVideoInput = buildItemObject(videoOptions);
+            const testVideo = await seedItemToDatabase(videoOptions);
+    
+            const response = await request(app)
+                .post(`/items/${testVideo._id}/delete`)
+                .type('form')
+                .send(testVideoInput);
+    
+            const deletedVideo = await Video.findById(testVideo._id)
+            
+            assert.equal(response.status, 302);
+            assert.equal(response.headers.location, '/');
+            assert.isNull(deletedVideo, 'item was not deleted from the database');
+        });
+    }); 
+});
