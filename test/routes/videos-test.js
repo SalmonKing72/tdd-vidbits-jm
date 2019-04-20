@@ -228,12 +228,40 @@ describe('Server path: /videos/:videoId/updates', () => {
                 .type('form')
                 .send(videoUpdateInput);
 
-            const updatedVideo = await Video.findOne({description: videoUpdateInput.description});
+            const updatedVideo = await Video.findOne({_id: video._id});
 
             assert.isNotNull(updatedVideo);
             //check to see if we redirect to the video's view
             assert.strictEqual(response.status, 302);
             assert.equal(response.headers.location, `/videos/${updatedVideo._id}`);
+        });
+
+        it('presents errors for invalid update', async () => {
+            const video = await seedItemToDatabase({
+                description: "My favorite item", 
+                title: "69 Camaro SS",
+                videoUrl: 'https://www.youtube.com/embed/UiZxU9Ykhr8'
+            });
+
+            const videoUpdateInput = {
+                title: video.title,
+                videoUrl: video.videoUrl
+            };
+
+            const response = await request(app)
+                .post(`/videos/${video._id}/updates`)
+                .type('form')
+                .send(videoUpdateInput);
+
+            //check to see if proper response and error messages are displayed
+            assert.strictEqual(response.status, 400);
+            assert.include(parseTextFromHTML(response.text, 'form'), 'required');
+
+            //check to see if video data is still the original
+            const currentVideo = await Video.findOne({_id: video._id});
+            assert.equal(currentVideo.title, video.title);
+            assert.equal(currentVideo.description, video.description);
+            assert.equal(currentVideo.videoUrl, video.videoUrl);
         });
     });
 });

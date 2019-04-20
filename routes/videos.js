@@ -49,4 +49,22 @@ router.get('/:videoId/edit', async (req, res, err) => {
     res.render('videos/edit', {newVideo: video});
 });
 
+router.post('/:videoId/updates', async (req, res, err) => {
+    const updatedVideoObj = {
+        title: req.body.title,
+        description: req.body.description,
+        videoUrl: req.body.videoUrl
+    };
+
+    const video = new Video(updatedVideoObj);
+    video.validateSync();
+
+    if(video.errors) {
+        res.status(400).render('videos/edit', {newVideo: video});
+    } else {
+        await Video.updateOne({_id: req.params.videoId}, updatedVideoObj, {omitUndefined: true});
+        res.redirect(`/videos/${req.params.videoId}`);    
+    }
+});
+
 module.exports = router;

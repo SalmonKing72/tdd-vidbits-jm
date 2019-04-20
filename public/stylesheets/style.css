@@ -18,7 +18,7 @@ body {
   display: block;
 }
 
-.save-video-button {
+.save-video-button, .edit-video-button {
   text-align: center; 
   background-color: #ff9b34;
   border: none;

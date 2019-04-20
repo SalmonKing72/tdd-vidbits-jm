@@ -23,7 +23,7 @@ describe('User visits edit item page', () => {
             browser.setValue('#title-input', updatedTitle);
             browser.setValue('#description-input', video.description);
             browser.setValue('#videoUrl-input', video.videoUrl);
-            browser.setValue('#submit-button');
+            browser.click('#submit-button');
 
             assert.include(browser.getText('body'), updatedTitle);
             assert.include(browser.getText('body'), video.description);
